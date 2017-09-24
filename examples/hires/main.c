@@ -300,6 +300,17 @@ int main(int argc, char *argv[])
 	iYOffset = 0;
 	iPassCount = 4;
 #endif
+//#if 0
+//	gsGlobal->Mode = GS_MODE_DTV_1080P; // might experiment with this unreleased 1080p mode more
+//	gsGlobal->Interlace = GS_NONINTERLACED;
+//	//gsGlobal->Field = GS_FIELD;
+//	gsGlobal->Field = GS_FRAME;
+//	gsGlobal->Width  = 1920;
+//	gsGlobal->Height = 1080;
+//	iXOffset = 0;
+//	iYOffset = 0;
+//	iPassCount = 4;
+//#endif
 
 	if ((gsGlobal->Interlace == GS_INTERLACED) && (gsGlobal->Field == GS_FRAME))
 		gsGlobal->Height /= 2;
