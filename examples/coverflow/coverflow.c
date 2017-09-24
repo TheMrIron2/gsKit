@@ -75,11 +75,13 @@ int main(int argc, char *argv[])
     int i;
     char filename[80];
 
-	gsGlobal->Mode = GS_MODE_DTV_720P;
-	gsGlobal->Interlace = GS_NONINTERLACED;
+	gsGlobal->Mode = GS_MODE_DTV_1080I;
+	gsGlobal->Interlace = GS_INTERLACED;
 	gsGlobal->Field = GS_FRAME;
-	gsGlobal->Width = 1280;
-	gsGlobal->Height = 720;
+	gsGlobal->Width  = 1920;
+	gsGlobal->Height = 1080;
+	iXOffset = 0;
+	iYOffset = 0;
 	iPassCount = 3;
 
 	gsGlobal->PSM = GS_PSM_CT16S;
