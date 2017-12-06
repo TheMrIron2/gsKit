@@ -228,18 +228,18 @@ int main(int argc, char *argv[])
 	int iPassCount;
 
 #if 0
-	gsGlobal->Mode = GS_MODE_NTSC;
-	gsGlobal->Interlace = GS_INTERLACED;
+	gsGlobal->Mode = GS_MODE_NTSC; // Which mode is activated in the GPU - this is NTSC, 480i standard
+	gsGlobal->Interlace = GS_INTERLACED; // Indicates interlaced or non-interlaced (progressive)
 	//gsGlobal->Field = GS_FIELD;
-	gsGlobal->Field = GS_FRAME;
-	gsGlobal->Width = 704;
-	gsGlobal->Height = 464;
-	iXOffset = -32;
-	iYOffset = 8;
-	iPassCount = 2;
+	gsGlobal->Field = GS_FRAME; 
+	gsGlobal->Width = 704; // Horizontal resolution
+	gsGlobal->Height = 464; // Vertical resolution
+	iXOffset = -32; // Offset (usually used to counteract overscan or mispositioning)
+	iYOffset = 8; // Offset 
+	iPassCount = 2; // Number of render passes
 #endif
 #if 0
-	gsGlobal->Mode = GS_MODE_PAL;
+	gsGlobal->Mode = GS_MODE_PAL; // PAL ie. Europe and Australia
 	gsGlobal->Interlace = GS_INTERLACED;
 	//gsGlobal->Field = GS_FIELD;
 	gsGlobal->Field = GS_FRAME;
@@ -274,7 +274,7 @@ int main(int argc, char *argv[])
 	gsGlobal->Interlace = GS_NONINTERLACED;
 	gsGlobal->Field = GS_FRAME;
 	gsGlobal->Width = 1280;
-	gsGlobal->Height = 720;//704;
+	gsGlobal->Height = 720; //704;
 	iXOffset = 0;
 	iYOffset = 0;
 	iPassCount = 3;
@@ -300,18 +300,39 @@ int main(int argc, char *argv[])
 	iYOffset = 0;
 	iPassCount = 4;
 #endif
-//#if 0
-//	gsGlobal->Mode = GS_MODE_DTV_1080P; // might experiment with this unreleased 1080p mode more
-//	gsGlobal->Interlace = GS_NONINTERLACED;
-//	//gsGlobal->Field = GS_FIELD;
-//	gsGlobal->Field = GS_FRAME;
-//	gsGlobal->Width  = 1920;
-//	gsGlobal->Height = 1080;
-//	iXOffset = 0;
-//	iYOffset = 0;
-//	iPassCount = 4;
-//#endif
-
+#if 0
+	gsGlobal->Mode = GS_MODE_DTV_1080P; // might experiment with this unreleased 1080p mode more
+	gsGlobal->Interlace = GS_NONINTERLACED;
+	gsGlobal->Field = GS_FRAME;
+	gsGlobal->Width  = 1920;
+	gsGlobal->Height = 1080;
+	iXOffset = 0;
+	iYOffset = 0;
+	iPassCount = 4;
+#endif
+	
+#if 0
+	gsGlobal->Mode = GS_MODE_DTV_720P; // More realistic 720p resolution - 640x720 int scaled to 1280x720. This should allow for significantly more impressive results technically however at the cost of native pixel counts. Could be used in advanced demos if this works?
+	gsGlobal->INTERLACE = GS_NONINTERLACED;
+	gsGlobal->FIELD = GS_FRAME;
+	gsGlobal->Width = 640;
+	gsGlobal->Height = 720;
+	iXOffset = 0;
+	iYOffset = 0;
+	iPassCount = 3; // 2?
+#endif
+#if 0
+	gsGlobal->Mode = GS_MODE_DTV_1080I; //
+	gsGlobal->Interlace = GS_INTERLACED;
+	//gsGlobal->Field = GS_FIELD; // field rendering, not what we want
+	gsGlobal->Field = GS_FRAME;
+	gsGlobal->Width  = 640;
+	gsGlobal->Height = 540;
+	iXOffset = 0;
+	iYOffset = 0;
+	iPassCount = 3; // Needs clarification
+#endif
+	
 	if ((gsGlobal->Interlace == GS_INTERLACED) && (gsGlobal->Field == GS_FRAME))
 		gsGlobal->Height /= 2;
 
