@@ -163,7 +163,7 @@ int gsKit_texture_png(GSGLOBAL *gsGlobal, GSTEXTURE *Texture, char *Path)
 		return -1;
 	}
 
-	Texture->Filter = GS_FILTER_NEAREST;
+	Texture->Filter = GS_FILTER_LINEAR;
 	png_read_end(png_ptr, NULL);
 	png_destroy_read_struct(&png_ptr, &info_ptr, (png_infopp) NULL);
 	fclose(File);
@@ -224,7 +224,7 @@ int gsKit_texture_bmp(GSGLOBAL *gsGlobal, GSTEXTURE *Texture, char *Path)
 
 	Texture->Width = Bitmap.InfoHeader.Width;
 	Texture->Height = Bitmap.InfoHeader.Height;
-	Texture->Filter = GS_FILTER_NEAREST;
+	Texture->Filter = GS_FILTER_LINEAR;
 
 	if(Bitmap.InfoHeader.BitCount == 4)
 	{
@@ -443,7 +443,7 @@ int  gsKit_texture_jpeg(GSGLOBAL *gsGlobal, GSTEXTURE *Texture, char *Path)
 	Texture->Width =  jpg->width;
 	Texture->Height = jpg->height;
 	Texture->PSM = GS_PSM_CT24;
-	Texture->Filter = GS_FILTER_NEAREST;
+	Texture->Filter = GS_FILTER_LINEAR;
 	Texture->VramClut = 0;
 	Texture->Clut = NULL;
 
@@ -499,7 +499,7 @@ int  gsKit_texture_tiff(GSGLOBAL *gsGlobal, GSTEXTURE *Texture, char *Path)
 	}
 
 	Texture->PSM = GS_PSM_CT32;
-	Texture->Filter = GS_FILTER_NEAREST;
+	Texture->Filter = GS_FILTER_LINEAR;
 	Texture->VramClut = 0;
 	Texture->Clut = NULL;
 
@@ -579,7 +579,7 @@ int gsKit_texture_raw(GSGLOBAL *gsGlobal, GSTEXTURE *Texture, char *Path)
 
 	if(fread(Texture->Mem, FileSize, 1, File) <= 0)
 	{
-		printf("Texture might be bad: %s\n", Path);
+		printf("Texture might be corrupted: %s\n", Path);
 		printf("Texture size: %d\n", FileSize);
 	}
 	fclose(File);
@@ -621,7 +621,7 @@ int gsKit_texture_fnt_raw(GSGLOBAL *gsGlobal, GSFONT *gsFont)
 	gsFont->Texture->Width  = data[1];
 	gsFont->Texture->Height = data[2];
 	gsFont->Texture->PSM    = data[3];
-	gsFont->Texture->Filter = GS_FILTER_NEAREST;
+	gsFont->Texture->Filter = GS_FILTER_LINEAR;
 	if(gsFont->Texture->PSM != GS_PSM_T8 && gsFont->Texture->PSM != GS_PSM_T4)
 	{
 		gsFont->Texture->VramClut = 0;
