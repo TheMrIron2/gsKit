@@ -228,12 +228,12 @@ int main(int argc, char *argv[])
 	int iPassCount;
 
 #if 0
-	gsGlobal->Mode = GS_MODE_NTSC; // Which mode is activated in the GPU - this is NTSC, 480i standard
+	gsGlobal->Mode = GS_MODE_NTSC; // Which video mode we will use - this is NTSC, 480i standard
 	gsGlobal->Interlace = GS_INTERLACED; // Indicates interlaced or non-interlaced (progressive)
 	//gsGlobal->Field = GS_FIELD;
 	gsGlobal->Field = GS_FRAME; 
-	gsGlobal->Width = 704; // Horizontal resolution
-	gsGlobal->Height = 464; // Vertical resolution
+	gsGlobal->Width = 704; // Horizontal resolution variable
+	gsGlobal->Height = 464; // Vertical resolution variable - note; these can be pretty much anything so long as they work in that resolution, ie. 640x540 - and at lower res like 480i/576i you can use pretty much anything because of overscan
 	iXOffset = -32; // Offset (usually used to counteract overscan or mispositioning)
 	iYOffset = 8; // Offset 
 	iPassCount = 2; // Number of render passes
@@ -286,6 +286,7 @@ int main(int argc, char *argv[])
 	gsGlobal->Field = GS_FRAME;
 	gsGlobal->Width  = 1920;
 	gsGlobal->Height = 1080;
+	gsGlobal->Filtering = GS_FILTER_LINEAR; // filter the 1920x1080 background texture with bilinear instead of nearest
 	iXOffset = 0;
 	iYOffset = 0;
 	iPassCount = 3;
@@ -300,6 +301,18 @@ int main(int argc, char *argv[])
 	iYOffset = 0;
 	iPassCount = 4;
 #endif
+
+#if 0
+	gsGlobal->Mode = GS_MODE_DTV_1080I;
+	gsGlobal->Interlace = GS_INTERLACED;
+	gsGlobal->Field = GS_FRAME;
+	gsGlobal->Width  = 960;
+	gsGlobal->Height = 540;
+	iXOffset = 0;
+	iYOffset = 0;
+	iPassCount = 3;
+#endif
+	
 #if 0
 	gsGlobal->Mode = GS_MODE_DTV_1080P; // might experiment with this unreleased 1080p mode more
 	gsGlobal->Interlace = GS_NONINTERLACED;
@@ -311,16 +324,6 @@ int main(int argc, char *argv[])
 	iPassCount = 4;
 #endif
 	
-#if 0
-	gsGlobal->Mode = GS_MODE_DTV_720P; // More realistic 720p resolution - 640x720 int scaled to 1280x720. This should allow for significantly more impressive results technically however at the cost of native pixel counts. Could be used in advanced demos if this works?
-	gsGlobal->INTERLACE = GS_NONINTERLACED;
-	gsGlobal->FIELD = GS_FRAME;
-	gsGlobal->Width = 640;
-	gsGlobal->Height = 720;
-	iXOffset = 0;
-	iYOffset = 0;
-	iPassCount = 3; // 2?
-#endif
 #if 0
 	gsGlobal->Mode = GS_MODE_DTV_1080I; //
 	gsGlobal->Interlace = GS_INTERLACED;
