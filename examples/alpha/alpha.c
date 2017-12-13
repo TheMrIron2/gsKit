@@ -39,8 +39,8 @@ int main(int argc, char *argv[])
 
 	gsGlobal->PSM = GS_PSM_CT24;
 	gsGlobal->PSMZ = GS_PSMZ_16S;
-	// gsGlobal->DoubleBuffering = GS_SETTING_OFF;
-	// gsGlobal->ZBuffering = GS_SETTING_OFF;
+	gsGlobal->DoubleBuffering = GS_SETTING_ON; // living life on the dangerously v-synced side
+	gsGlobal->ZBuffering = GS_SETTING_ON; // experimenting with Z-buffered alpha, expecting crashes
 
 	dmaKit_init(D_CTRL_RELE_OFF,D_CTRL_MFD_OFF, D_CTRL_STS_UNSPEC,
 		    D_CTRL_STD_OFF, D_CTRL_RCYC_8, 1 << DMA_CHANNEL_GIF);
