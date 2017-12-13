@@ -188,6 +188,7 @@ int main(int argc, char *argv[])
 	gsGlobal->Filtering = GS_FILTER_LINEAR; // Look at me, new code - will filter textures when/if I add them
 	gsGlobal->Dithering = GS_SETTING_OFF; // keeping this option open however I doubt it will be needed at 960x540
 	gsGlobal->DoubleBuffering = GS_SETTING_OFF; // disabling for now so I can see how it runs without double-buffering's performance impact
+	gsGlobal->DoSubOffset = GS_SETTING_OFF; // I'm assuming this is disabled anyway but better safe than sorry
 	gsKit_init_screen(gsGlobal);
 	
 	
