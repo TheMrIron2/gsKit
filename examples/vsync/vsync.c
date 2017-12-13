@@ -130,18 +130,22 @@ int main(int argc, char *argv[])
     //gsGlobal->Width = 640;
     //gsGlobal->Height = 448;
 
-    gsGlobal->Mode = GS_MODE_PAL;
-    gsGlobal->Interlace = GS_INTERLACED;
-	gsGlobal->Field = GS_FIELD;
-    gsGlobal->Width = 640;
-    gsGlobal->Height = 512;
-
-    gsKit_init_screen(gsGlobal);
+    //gsGlobal->Mode = GS_MODE_PAL;
+    //gsGlobal->Interlace = GS_INTERLACED;
+    //gsGlobal->Field = GS_FIELD;
+    //gsGlobal->Width = 640;
+    //gsGlobal->Height = 512;
 
     //gsGlobal->Mode = GS_MODE_DTV_480P;
     //gsGlobal->Interlace = GS_NONINTERLACED;
     //gsGlobal->Field = GS_FRAME;
     //gsGlobal->Width = 720;
+    //gsGlobal->Height = 480;
+
+    //gsGlobal->Mode = GS_MODE_DTV_480P; // actual 16:9 480p, non-anamorphic (worth a shot)
+    //gsGlobal->Interlace = GS_NONINTERLACED;
+    //gsGlobal->Field = GS_FRAME;
+    //gsGlobal->Width = 853;
     //gsGlobal->Height = 480;
 
     //gsGlobal->Mode = GS_MODE_DTV_1080I;
@@ -154,15 +158,39 @@ int main(int argc, char *argv[])
     //gsGlobal->Dithering = GS_SETTING_ON;
 
     // A width of 640 would work as well
-    // However a height of 720 doesn't seem to work well
+    // However a height of 720 doesn't seem to work well (would've been nice to know before submitting 640x720 720p code)
     //gsGlobal->Mode = GS_MODE_DTV_720P;
     //gsGlobal->Interlace = GS_NONINTERLACED;
     //gsGlobal->Field = GS_FRAME;
-    //gsGlobal->Width = 640;
+    //gsGlobal->Width = 640; // 1280x360 int-scaled??
     //gsGlobal->Height = 360;
     //gsGlobal->PSM = GS_PSM_CT16;
     //gsGlobal->PSMZ = GS_PSMZ_16;
 
+    // 960x720, ie. 4:3 720p
+    //gsGlobal->Mode = GS_MODE_DTV_720P;
+    //gsGlobal->Interlace = GS_NONINTERLACED;
+    //gsGlobal->Field = GS_FRAME;
+    //gsGlobal->Width = 960;
+    //gsGlobal->Height = 720;
+    //gsGlobal->PSM = GS_PSM_CT16;
+    //gsGlobal->PSMZ = GS_PSMZ_16;
+    //gsGlobal->DoubleBuffering = GS_SETTING_OFF; // I don't trust myself with these pixel counts
+	
+    // Trying 960x540, I like to call this "Doom on Nintendo Switch" mode
+	gsGlobal->Mode = GS_MODE_DTV_1080I;
+	gsGlobal->Interlace = GS_INTERLACED;
+	gsGlobal->Field = GS_FIELD;
+	gsGlobal->Width = 960;
+	gsGlobal->Height = 540; // I would have tried 960x1080 however since 640x720 didn't work I'm assuming it doesn't like height-heavy resolutions
+	gsGlobal->PSM = GS_PSM_CT16;
+	gsGlobal->PSMZ = GS_PSMZ_16;
+	gsGlobal->Filtering = GS_FILTER_LINEAR; // Look at me, new code - will filter textures when/if I add them
+	gsGlobal->Dithering = GS_SETTING_OFF; // keeping this option open however I doubt it will be needed at 960x540
+	gsGlobal->DoubleBuffering = GS_SETTING_OFF; // disabling for now so I can see how it runs without double-buffering's performance impact
+	gsKit_init_screen(gsGlobal);
+	
+	
 	// You can use these to turn off Z/Double Buffering. They are on by default.
 	// Modes with widths >= 1024 might not work with them on
     // gsGlobal->DoubleBuffering = GS_SETTING_OFF;
